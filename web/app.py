@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from werkzeug.security import check_password_hash
 import json, os
 from werkzeug.security import generate_password_hash
-
+import random
 
 app = Flask(__name__)
 app.secret_key = 'atlascientifico_2025_login_seguro'
@@ -13,7 +13,7 @@ app.secret_key = 'atlascientifico_2025_login_seguro'
 @app.route('/area')
 def areas():
     import json
-    with open('web/data/datos.json', 'r', encoding='utf-8') as f:
+    with open('data/json/detalles_revistas.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     # Extraer todas las áreas únicas
@@ -27,7 +27,7 @@ def areas():
 @app.route('/area/<area_nombre>')
 def ver_area(area_nombre):
     import json, os
-    ruta = os.path.join('web', 'data', 'datos.json')
+    ruta = os.path.join('data', 'json', 'detalles_revistas.json')
     with open(ruta, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -41,7 +41,7 @@ def ver_area(area_nombre):
 @app.route('/catalogo')
 def catalogos():
     import json
-    with open('web/data/datos.json', 'r', encoding='utf-8') as f:
+    with open('data/json/detalles_revistas.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     # Extraer todas las áreas únicas
@@ -55,7 +55,7 @@ def catalogos():
 @app.route('/catalogo/<catalogo_nombre>')
 def ver_catalogo(catalogo_nombre):
     import json, os
-    ruta = os.path.join('web', 'data', 'datos.json')
+    ruta = os.path.join('data', 'json', 'detalles_revistas.json')
     with open(ruta, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -71,24 +71,27 @@ from collections import defaultdict
 @app.route('/explorar')
 def explorar():
     import json, os
-    ruta = os.path.join('web', 'data', 'datos.json')
+    from collections import defaultdict
+
+    ruta = os.path.join('data', 'json', 'detalles_revistas.json')
     with open(ruta, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    letras = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    letras = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")  # ← Agregado los números
     conteo = defaultdict(int)
     for nombre in data:
         inicial = nombre[0].upper()
-        if inicial.isalpha():
+        if inicial.isalnum():  # ← acepta letras y números
             conteo[inicial] += 1
 
     return render_template("explorar.html", letras=letras, conteo=conteo)
 
 
+
 @app.route('/explorar/<letra>')
 def explorar_letra(letra):
     import json, os
-    ruta = os.path.join('web', 'data', 'datos.json')
+    ruta = os.path.join('data', 'json', 'detalles_revistas.json')
     with open(ruta, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -112,7 +115,7 @@ def busqueda():
 
     if q:
         palabras = q.lower().split()
-        ruta = os.path.join('web', 'data', 'datos.json')
+        ruta = os.path.join('data', 'json', 'detalles_revistas.json')
         with open(ruta, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
@@ -143,7 +146,7 @@ def creditos():
 def detalle_revista(nombre):
     import json, os
 
-    ruta_datos = os.path.join('web', 'data', 'datos.json')
+    ruta_datos = os.path.join('data', 'json', 'detalles_revistas.json')
     with open(ruta_datos, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -248,7 +251,7 @@ def toggle_favorito(nombre):
         return {'status': 'unauthorized'}, 401
 
     import json, os
-    ruta_datos = os.path.join('web', 'data', 'datos.json')
+    ruta_datos = os.path.join('data', 'json', 'detalles_revistas.json')
     with open(ruta_datos, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -292,7 +295,7 @@ def mis_favoritos():
 
     import json, os
     ruta_favs = os.path.join('web', 'data', 'favoritos.json')
-    ruta_datos = os.path.join('web', 'data', 'datos.json')
+    ruta_datos = os.path.join('data', 'json', 'detalles_revistas.json')
 
     if not os.path.exists(ruta_favs):
         favoritos = {}
@@ -319,13 +322,28 @@ def mis_favoritos():
     return render_template('favoritos.html', revistas=revistas_favoritas)
 
 
-   
-
-
 @app.route('/')
 def index():
-    '''Página principal de la aplicación'''
-    return render_template('index.html')
+    '''Página principal de la aplicación con selección aleatoria de revistas'''
+    ruta = os.path.join('data', 'json', 'detalles_revistas.json')
+    with open(ruta, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    revistas = list(data.items())
+    seleccionadas = random.sample(revistas, 3) if len(revistas) >= 3 else revistas
+
+    revistas_info = []
+    for nombre, datos in seleccionadas:
+        revistas_info.append({
+            "nombre": nombre,
+            "h_index": datos.get("h_index", "N/A"),
+            "areas": ', '.join(datos.get("areas", [])),
+            "catalogos": ', '.join(datos.get("catalogos", []))
+        })
+
+    return render_template('index.html', revistas_interes=revistas_info)
+
+
 
 
 if __name__ == '__main__':

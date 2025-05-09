@@ -20,51 +20,24 @@
 <section class="container py-5">
     <h2 class="text-center mb-4">Te podrían interesar</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        
+        {% for revista in revistas_interes %}
         <div class="col">
             <div class="card h-100 shadow">
                 <div class="card-body">
-                    <h5 class="card-title">Nature</h5>
+                    <h5 class="card-title">{{ revista.nombre }}</h5>
                     <p class="card-text">
-                        <strong>Área:</strong> Multidisciplinaria<br>
-                        <strong>Cuartil:</strong> Q1<br>
-                        <strong>SJR:</strong> 14.72
+                        <strong>Áreas:</strong> {{ revista.areas }}<br>
+                        <strong>Catálogos:</strong> {{ revista.catalogos }}<br>
+                        <strong>H-Index:</strong> {{ revista.h_index }}
                     </p>
-                    <a href="https://www.nature.com/" class="btn btn_ver" target="_blank">Ver revista</a>
                 </div>
             </div>
         </div>
-
-        <div class="col">
-            <div class="card h-100 shadow">
-                <div class="card-body">
-                    <h5 class="card-title">The Lancet</h5>
-                    <p class="card-text">
-                        <strong>Área:</strong> Medicina<br>
-                        <strong>Cuartil:</strong> Q1<br>
-                        <strong>SJR:</strong> 11.54
-                    </p>
-                    <a href="https://www.thelancet.com/" class="btn btn_ver" target="_blank">Ver revista</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100 shadow">
-                <div class="card-body">
-                    <h5 class="card-title">IEEE Transactions on Pattern Analysis</h5>
-                    <p class="card-text">
-                        <strong>Área:</strong> Ciencias de la Computación<br>
-                        <strong>Cuartil:</strong> Q1<br>
-                        <strong>SJR:</strong> 7.18
-                    </p>
-                    <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34" class="btn btn_ver" target="_blank">Ver revista</a>
-                </div>
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
 </section>
+
+
 
 
 <section class="bg-light text-center py-5">
