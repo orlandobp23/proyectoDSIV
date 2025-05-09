@@ -23,7 +23,7 @@ def main():
                 detalles[titulo] = datos
                 contador += 1
 
-                # Guardado cada 50 revistas 
+                # Guardado cada 10,000 revistas 
                 if contador % 10000 == 0:
                     guardar_json(detalles, path_salida)
                     print(f" Progreso guardado: {contador} revistas procesadas")
