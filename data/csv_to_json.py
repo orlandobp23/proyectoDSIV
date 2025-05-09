@@ -3,48 +3,58 @@ import pandas as pd
 import json
 import os
 
-
 revistas = {}
 
 folder_areas = "data/csv/areas"
 folder_catalogos = "data/csv/catalogos"
 ruta_salida = "data/json/revistas.json"
 
+def corregir_titulo(titulo):
+    try:
+        return titulo.encode("latin1").decode("utf-8")
+    except:
+        return titulo
+
 # leer areas
 for archivo in os.listdir(folder_areas):
     area = archivo.replace(".csv", "").split()[0].split(" ")[0].upper()
     ruta = os.path.join(folder_areas, archivo)
     df = pd.read_csv(ruta, encoding="latin1")
-    
-    for titulo in df['TITULO:']:
+    df.columns = [col.strip().lower().replace(":", "") for col in df.columns]
+
+    for titulo in df["titulo"]:
         titulo_limpio = titulo.strip().lower()
         if titulo_limpio not in revistas:
-            revistas[titulo_limpio] = {"areas":[],"catalogos":[]}
+            revistas[titulo_limpio] = {"areas": [], "catalogos": []}
         if area not in revistas[titulo_limpio]["areas"]:
-            revistas[titulo_limpio]["areas"].append(area)   
-
+            revistas[titulo_limpio]["areas"].append(area)
 
 # leer catalogos
 for archivo in os.listdir(folder_catalogos):
     catalogo = archivo.replace(".csv", "").replace("_RadGridExport", "").upper()
     ruta = os.path.join(folder_catalogos, archivo)
     df = pd.read_csv(ruta, encoding="latin1")
-    
-    for titulo in df['TITULO:']:
+    df.columns = [col.strip().lower().replace(":", "") for col in df.columns]
+
+    for titulo in df["titulo"]:
         titulo_limpio = titulo.strip().lower()
         if titulo_limpio not in revistas:
-            revistas[titulo_limpio] = {"areas":[],"catalogos":[]}
+            revistas[titulo_limpio] = {"areas": [], "catalogos": []}
         if catalogo not in revistas[titulo_limpio]["catalogos"]:
             revistas[titulo_limpio]["catalogos"].append(catalogo)
 
-#guardar
-with open(ruta_salida, "w", encoding="utf-8") as f:
-    json.dump(revistas, f, indent=2, ensure_ascii=False)
+# corregir codificación de títulos
+revistas_limpias = {}
+for titulo, info in revistas.items():
+    nuevo_titulo = corregir_titulo(titulo)
+    revistas_limpias[nuevo_titulo] = info
 
-    
-#verificar
+# guardar
+with open(ruta_salida, "w", encoding="utf-8") as f:
+    json.dump(revistas_limpias, f, indent=2, ensure_ascii=False)
+
+# verificar
 with open(ruta_salida, "r", encoding="utf-8") as f:
     revistas_cargadas = json.load(f)
-print(f"{len(revistas_cargadas)} revistas cargadas exitosamente")
 
-
+print(f"{len(revistas_cargadas)} revistas cargadas exitosamente (títulos corregidos)")
