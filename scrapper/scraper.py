@@ -76,8 +76,11 @@ def scrap_datos_revista(url):
         return None
 
     def extraer_widget_html():
-        iframe = soup.select_one('iframe[src*="journalsearch_widget"]')
-        return str(iframe) if iframe else None
+        input_tag = soup.find('input', {'id': 'embed_code'})
+        if input_tag and input_tag.get("value"):
+            return input_tag["value"]
+        return None
+
 
     datos = {
         "website": extraer_homepage(),
@@ -85,7 +88,7 @@ def scrap_datos_revista(url):
         "subject_area": None,  # Este campo no está en esa parte visible
         "publisher": buscar_con_h2("Publisher"),
         "issn": buscar_con_h2("ISSN"),
-        "widget": extraer_widget_html(),
+        "widget": extraer_widget_html() or "No dispobinle",
         "publication_type": buscar_con_h2("Publication type")
     }
 
