@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Orlando Bojorquez Preciado",
+    "rol": "Desarrollador Full-Stack",
+    "ocupacion": "Socio de Big Three",
+    "foto": "juan.jpg"
+  },
+  {
+    "nombre": "Luis Angel Bracamonte Murillo",
+    "rol": "Desarrollador Full-Stack",
+    "ocupacion": "Socio de Big Three",
+    "foto": "ana.jpg"
+  },
+  {
+    "nombre": "Luis Arturo Cordova Ruiz",
+    "rol": "Desarrollador Full-Stack",
+    "ocupacion": "Socio de Big Three",
+    "foto": "luis.jpg"
+  }
+]

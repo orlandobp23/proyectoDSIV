@@ -68,4 +68,19 @@
     z-index: 1030;
 }
 
+.letra-ficha {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+}
+
+.letra-ficha:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    background-color: rgb(0, 110, 255);
+}
+
+.icono-letra {
+    font-size: 1.8rem;
+}
 

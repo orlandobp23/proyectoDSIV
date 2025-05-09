@@ -6,10 +6,14 @@
 <!-- Hero Section -->
  <section class="text-white text-center d-flex align-items-center justify-content-center" style="background: url('/static/images/fondo.jpg') no-repeat center center; background-size: cover; height: 400px;">
     <div class="fondo_glass position-relative">
-        <img src="{{ url_for('static', filename='images/mascota.png') }}" alt="Logo" class="mascota">
-        <h1 class="display-4 fw-bold" style="margin-top: 90px;">Artículos Científicos</h1>
+        <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="Logo" class="mascota">
+        <h1 class="display-4 fw-bold" style="margin-top: 90px;">Atlas Científico</h1>
         <p class="lead">Explora un mundo de artículos científicos.</p>
-        <a href="" class="btn color_btn btn-lg mt-3 ">Explorar Catálogo</a>
+           <form method="GET" action="{{ url_for('busqueda') }}" class="mb-5 text-center">
+        <input type="text" name="q" placeholder="Ej: biología neuro química" class="form-control w-50 d-inline-block me-2" required>
+        <button type="submit" class="btn color_btn">Buscar</button>
+    </form>
+        </a>
     </div>
 </section>
 

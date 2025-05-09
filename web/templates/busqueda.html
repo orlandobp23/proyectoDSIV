@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Búsqueda{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Buscar revistas científicas</h2>
+
+    <form method="GET" action="{{ url_for('busqueda') }}" class="mb-5 text-center">
+        <input type="text" name="q" placeholder="Ej: biología neuro química" class="form-control w-50 d-inline-block me-2" required>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if resultados %}
+    <div class="table-responsive">
+        <table id="tablaBusqueda" class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Título</th>
+                    <th>Áreas</th>
+                    <th>Catálogos</th>
+                    <th>H-Index</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for revista in resultados %}
+                <tr>
+                    <td><a href="{{ url_for('detalle_revista', nombre=revista.nombre) }}" class="text-decoration-none">{{ revista.nombre }}</a></td>
+                    <td>
+                        {% for area in revista.areas %}
+                            <a href="{{ url_for('ver_area', area_nombre=area) }}" class="badge bg-success me-1 text-decoration-none">{{ area }}</a>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for cat in revista.catalogos %}
+                            <a href="{{ url_for('ver_catalogo', catalogo_nombre=cat) }}" class="badge bg-primary me-1 text-decoration-none">{{ cat }}</a>
+                        {% endfor %}
+                    </td>
+                    <td>{{ revista.h_index }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% elif q %}
+        <p class="text-center">No se encontraron resultados para "{{ q }}".</p>
+    {% endif %}
+</div>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tablaBusqueda').DataTable();
+    });
+</script>
+{% endblock %}

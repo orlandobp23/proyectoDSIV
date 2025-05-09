@@ -10,5 +10,24 @@
     "ultima_visita": "2025-05-08",
     "areas": ["CIENCIAS_EXA", "ING"],
     "catalogos": ["JCR", "SCOPUS"]
-  }
+  },
+
+  
+    "aana journal": {
+        "website": "Homepage",
+        "h_index": null,
+        "subject_area": null,
+        "publisher": null,
+        "issn": null,
+        "widget": null,
+        "publication_type": null,
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-08"
+    }
+
 }

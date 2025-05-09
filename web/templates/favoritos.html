@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Mis revistas favoritas{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Mis revistas favoritas</h2>
+
+    {% if revistas %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Título</th>
+                    <th>Áreas</th>
+                    <th>Catálogos</th>
+                    <th>H-Index</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for revista in revistas %}
+                <tr>
+                    <td><a href="{{ url_for('detalle_revista', nombre=revista.nombre) }}">{{ revista.nombre }}</a></td>
+                    <td>
+                        {% for area in revista.areas %}
+                            <a href="{{ url_for('ver_area', area_nombre=area) }}" class="badge bg-success text-decoration-none me-1">{{ area }}</a>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for cat in revista.catalogos %}
+                            <a href="{{ url_for('ver_catalogo', catalogo_nombre=cat) }}" class="badge bg-primary text-decoration-none me-1">{{ cat }}</a>
+                        {% endfor %}
+                    </td>
+                    <td>{{ revista.h_index }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center">Aún no has guardado ninguna revista como favorita.</p>
+    {% endif %}
+</div>
+{% endblock %}

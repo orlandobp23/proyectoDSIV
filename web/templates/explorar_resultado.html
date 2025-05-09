@@ -19,7 +19,7 @@
                 {% for revista in revistas %}
                 <tr>
                     <td>
-                        <a href="{{ url_for('detalle_revista', nombre=revista.nombre) }}">{{ revista.nombre }}</a>
+                        <a href="{{ url_for('detalle_revista', nombre=revista.nombre) }}" class="text-decoration-none">{{ revista.nombre }}</a>
                     </td>
                     <td>
                         {% for area in revista.areas %}

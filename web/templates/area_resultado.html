@@ -16,7 +16,7 @@
             <tbody>
                 {% for nombre, h_index in revistas %}
                 <tr>
-                    <td><a href="{{ url_for('detalle_revista', nombre=nombre) }}">{{ nombre }}</a></td>
+                    <td><a href="{{ url_for('detalle_revista', nombre=nombre) }}" class="text-decoration-none">{{ nombre }}</a></td>
                     <td>{{ h_index }}</td>
                 </tr>
                 {% endfor %}

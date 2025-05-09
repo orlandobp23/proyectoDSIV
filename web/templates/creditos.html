@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Créditos{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Créditos</h2>
+
+    <div class="table-responsive">
+        <table id="tablaCreditos" class="table table-bordered table-hover text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Ocupación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alumno in creditos %}
+                <tr>
+                    <td><img src="{{ url_for('static', filename='images/creditos/' + alumno.foto) }}" width="80" class="rounded"></td>
+                    <td>{{ alumno.nombre }}</td>
+                    <td>{{ alumno.rol }}</td>
+                    <td>{{ alumno.ocupacion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tablaCreditos').DataTable();
+    });
+</script>
+{% endblock %}

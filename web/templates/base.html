@@ -28,23 +28,31 @@
                     <li class="nav-item">
                         <a class="nav-link head_text {% if request.path.startswith('/explorar') %}active-tab{% endif %}" href="/explorar">Explorar</a>
                     </li>
+                      <li class="nav-item">
+                        <a class="nav-link head_text {% if request.path.startswith('/busqueda') %}active-tab{% endif %}" href="/busqueda">Busqueda</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link head_text {% if request.path.startswith('/creditos') %}active-tab{% endif %}" href="/creditos">Créditos</a>
                     </li>
+                    {% if session.get('usuario') %}
+                    <li class="nav-item">
+                        <a class="nav-link head_text  {% if request.path.startswith('/mis-favoritos') %}active-tab{% endif %}" href="{{ url_for('mis_favoritos') }}">Favoritos</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    {% if session.get('usuario') %}
+                        {% if session.get('usuario') %}
                         <li class="nav-item">
-                            <span class="navbar-text text-white me-3">Bienvenido, {{ session['usuario'] }}</span>
+                            <span class="navbar-text text-white me-3">Hola, {{ session['nombre'] }}</span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">Cerrar sesión</a>
+                            <a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
                         </li>
-                    {% else %}
+                        {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Iniciar sesión</a>
+                            <a class="nav-link" href="{{ url_for('login') }}">Iniciar sesión</a>
                         </li>
-                    {% endif %}
+                        {% endif %}
                 </ul>
             </div>
         </div>
