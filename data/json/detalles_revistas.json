@@ -1,0 +1,150 @@
+{
+    "2d materials": {
+        "website": "https://onlinelibrary.wiley.com/journal/15214095",
+        "h_index": "675",
+        "subject_area": [
+            "Engineering - Mechanical Engineering",
+            "Engineering - Mechanics of Materials",
+            "Materials Science - Materials Science (miscellaneous)",
+            "Materials Science - Nanoscience and Nanotechnology"
+        ],
+        "publisher": "Wiley-Blackwell",
+        "issn": "09359648, 15214095",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=19881&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=19881\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO",
+            "CIENCIAS_EXA",
+            "ING"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "3 biotech": {
+        "website": "https://www.nature.com/nbt/",
+        "h_index": "531",
+        "subject_area": [
+            "Biochemistry, Genetics and Molecular Biology - Biotechnology",
+            "Biochemistry, Genetics and Molecular Biology - Molecular Medicine",
+            "Chemical Engineering - Bioengineering",
+            "Engineering - Biomedical Engineering",
+            "Immunology and Microbiology - Applied Microbiology and Biotechnology"
+        ],
+        "publisher": "Nature Research",
+        "issn": "10870156, 15461696",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=16115&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=16115\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "JCR"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "aacl bioflux": {
+        "website": "No disponible",
+        "h_index": "27",
+        "subject_area": [
+            "Agricultural and Biological Sciences - Aquatic Science",
+            "Agricultural and Biological Sciences - Ecology, Evolution, Behavior and Systematics",
+            "Environmental Science - Management, Monitoring, Policy and Law",
+            "Environmental Science - Water Science and Technology"
+        ],
+        "publisher": "Bioflux Publishing House",
+        "issn": "18448143, 18449166",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=19300156808&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=19300156808\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO",
+            "ING"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "aacn advanced critical care": {
+        "website": "http://aacnacconline.org/",
+        "h_index": "51",
+        "subject_area": [
+            "Medicine - Emergency Medicine",
+            "Medicine - Medicine (miscellaneous)",
+            "Nursing - Critical Care Nursing"
+        ],
+        "publisher": "American Association of Critical-Care Nurses",
+        "issn": "15597768, 15597776",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=4700152443&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=4700152443\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "aana journal": {
+        "website": "https://www.aana.com/publications/aana-journal",
+        "h_index": "38",
+        "subject_area": [
+            "Medicine - Anesthesiology and Pain Medicine",
+            "Medicine - Medicine (miscellaneous)",
+            "Nursing - Advanced and Specialized Nursing",
+            "Nursing - Medical and Surgical Nursing"
+        ],
+        "publisher": "AANA Publishing Inc.",
+        "issn": "00946354, 21625239",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=26729&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=26729\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "aao journal": {
+        "website": "https://www.academyofosteopathy.org/aao-journal",
+        "h_index": "5",
+        "subject_area": [
+            "Health Professions - Complementary and Manual Therapy",
+            "Medicine - Complementary and Alternative Medicine",
+            "Nursing - Advanced and Specialized Nursing"
+        ],
+        "publisher": "American Academy of Osteopathy",
+        "issn": "23755717, 23755776",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=5100155055&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=5100155055\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "aaps journal": {
+        "website": "https://www.springer.com/journal/12248",
+        "h_index": "136",
+        "subject_area": [
+            "Pharmacology, Toxicology and Pharmaceutics - Pharmaceutical Science"
+        ],
+        "publisher": "Springer Science and Business Media Deutschland GmbH",
+        "issn": "15507416",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=4000148019&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=4000148019\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    }
+}
