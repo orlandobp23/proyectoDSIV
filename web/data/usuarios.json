@@ -10,5 +10,9 @@
     "obp": {
         "password": "000",
         "nombre": "Orlando Bojorquez Preciado"
+    },
+    "mag": {
+        "password": "scrypt:32768:8:1$NkftQrlU1eP48hnw$8d88b6d3bc8aff5106203efc5e0e40a39df3dac18eadb20ea0f2a139447e9548bc21fe8d5dcb29c479c99600529d1c86d6d9730ab3e0df2250f852cd0b62967a",
+        "nombre": "magdalena preciado"
     }
 }

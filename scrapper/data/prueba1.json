@@ -1,10 +1,21 @@
 {
-  "aana journal": {
+  "2d materials": {
+    "areas": [
+      "CIENCIAS_BIO",
+      "CIENCIAS_EXA",
+      "ING"
+    ],
+    "catalogos": [
+      "JCR",
+      "SCOPUS"
+    ]
+  },
+  "3 biotech": {
     "areas": [
       "CIENCIAS_BIO"
     ],
     "catalogos": [
-      "SCOPUS"
+      "JCR"
     ]
   }
 }

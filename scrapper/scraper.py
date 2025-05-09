@@ -12,7 +12,7 @@ def buscar_url_revista(nombre_revista):
     
     try:
         headers = {
-         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
         }
         response = requests.get(url_busqueda, headers=headers, timeout=10)
         time.sleep(5)
@@ -76,21 +76,40 @@ def scrap_datos_revista(url):
         return None
 
     def extraer_widget_html():
-        iframe = soup.select_one('iframe[src*="journalsearch_widget"]')
-        return str(iframe) if iframe else None
+        input_tag = soup.find('input', {'id': 'embed_code'})
+        if input_tag and input_tag.get("value"):
+            return input_tag["value"]
+        return None
+
+    def extraer_subject_area():
+        resultado = []
+        h2 = soup.find("h2", string=lambda t: t and "subject area" in t.lower())
+        if h2:
+            p = h2.find_next_sibling("p")
+            if p:
+                uls = p.find_all("ul", recursive=False)
+                for ul in uls:
+                    li_area = ul.find("li")
+                    if li_area:
+                        area = li_area.find("a")
+                        categoria_ul = li_area.find("ul")
+                        if area and categoria_ul:
+                            categorias = categoria_ul.find_all("a")
+                            for cat in categorias:
+                                resultado.append(f"{area.text.strip()} - {cat.text.strip()}")
+        return resultado if resultado else "No disponible"
 
     datos = {
-        "website": extraer_homepage(),
-        "h_index": extraer_h_index(),
-        "subject_area": None,  # Este campo no está en esa parte visible
-        "publisher": buscar_con_h2("Publisher"),
-        "issn": buscar_con_h2("ISSN"),
-        "widget": extraer_widget_html(),
-        "publication_type": buscar_con_h2("Publication type")
+        "website": extraer_homepage() or "No disponible",
+        "h_index": extraer_h_index() or "No disponible",
+        "subject_area": extraer_subject_area(),
+        "publisher": buscar_con_h2("Publisher") or "No disponible",
+        "issn": buscar_con_h2("ISSN") or "No disponible",
+        "widget": extraer_widget_html() or "No disponible",
+        "publication_type": buscar_con_h2("Publication type") or "No disponible"
     }
 
     return datos
-
 
 def obtener_info_revista(nombre_revista):
     print(f"\nProcesando revista: {nombre_revista}")

@@ -1,6 +1,9 @@
 '''Programa principal de MovieDB'''
 from flask import Flask, request, url_for , render_template, redirect, session
-
+from flask import Flask, render_template, request, redirect, session, url_for
+from werkzeug.security import check_password_hash
+import json, os
+from werkzeug.security import generate_password_hash
 
 
 app = Flask(__name__)
@@ -171,9 +174,10 @@ def detalle_revista(nombre):
 
 
 
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    import json, os
     ruta = os.path.join('web', 'data', 'usuarios.json')
     with open(ruta, 'r', encoding='utf-8') as f:
         usuarios = json.load(f)
@@ -182,14 +186,18 @@ def login():
     if request.method == 'POST':
         usuario = request.form['usuario']
         password = request.form['password']
-        if usuario in usuarios and usuarios[usuario]['password'] == password:
-            session['usuario'] = usuario
-            session['nombre'] = usuarios[usuario]['nombre']
-            return redirect(url_for('index'))
-        else:
-            error = 'Credenciales incorrectas'
+
+        if usuario in usuarios:
+            hash_guardado = usuarios[usuario]['password']
+            if check_password_hash(hash_guardado, password):
+                session['usuario'] = usuario
+                session['nombre'] = usuarios[usuario]['nombre']
+                return redirect(url_for('index'))
+
+        error = 'Credenciales incorrectas'
 
     return render_template('login.html', error=error)
+
 
 @app.route('/logout')
 def logout():
@@ -218,7 +226,7 @@ def registro():
             error = 'El usuario ya existe'
         else:
             usuarios[usuario] = {
-                "password": password,
+                "password": generate_password_hash(password),
                 "nombre": nombre
             }
             with open(ruta, 'w', encoding='utf-8') as f:
@@ -227,6 +235,7 @@ def registro():
             session['usuario'] = usuario
             session['nombre'] = nombre
             return redirect(url_for('index'))
+
 
     return render_template('registro.html', error=error)
 
