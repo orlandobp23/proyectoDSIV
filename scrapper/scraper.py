@@ -6,19 +6,16 @@ import time
 BASE_SEARCH_URL = "https://www.scimagojr.com/journalsearch.php?q="
 
 def buscar_url_revista(nombre_revista):
-    """
-    Devuelve la URL del perfil de la revista desde la página de búsqueda de SCImago.
-    """
     query = quote(nombre_revista)
     url_busqueda = BASE_SEARCH_URL + query
     print(f"Buscando URL de: {nombre_revista}")
     
     try:
-        headers ={
+        headers = {
          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
         }
-        response = requests.get(url_busqueda,headers=headers, timeout=10)
-        time.sleep(5)  # Tuve problemas con el servidor de SCImago, agregue un tiempo de espera para que no me detectara como bot
+        response = requests.get(url_busqueda, headers=headers, timeout=10)
+        time.sleep(5)
     except Exception as e:
         print(f"Error en la conexión para {nombre_revista}: {e}")
         return None
@@ -39,15 +36,13 @@ def buscar_url_revista(nombre_revista):
         return None
 
 def scrap_datos_revista(url):
-    """
-    Extrae información del perfil de la revista desde su página en SCImago.
-    """
     print(f"Accediendo a perfil: {url}")
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
         }
-        response = requests.get(url,headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=10)
+        time.sleep(5)
     except Exception as e:
         print(f"Error accediendo a {url}: {e}")
         return None
@@ -58,39 +53,57 @@ def scrap_datos_revista(url):
 
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    def extraer_texto(selector):
-        tag = soup.select_one(selector)
-        return tag.text.strip() if tag else None
+    def buscar_con_h2(titulo):
+        h2 = soup.find('h2', string=lambda t: t and titulo.lower() in t.lower())
+        if h2:
+            p = h2.find_next_sibling('p')
+            if p:
+                return p.text.strip()
+        return None
 
-    def extraer_widget_html(selector):
-        tag = soup.select_one(selector)
-        return str(tag) if tag else None
+    def extraer_h_index():
+        h2 = soup.find('h2', string=lambda t: t and "h-index" in t.lower())
+        if h2:
+            p = h2.find_next_sibling('p')
+            if p and 'hindexnumber' in p.get("class", []):
+                return p.text.strip()
+        return None
+
+    def extraer_homepage():
+        a = soup.find('a', string="Homepage")
+        if a and a.get("href"):
+            return a.get("href").strip()
+        return None
+
+    def extraer_widget_html():
+        iframe = soup.select_one('iframe[src*="journalsearch_widget"]')
+        return str(iframe) if iframe else None
 
     datos = {
-        "website": extraer_texto('a[target="_blank"]'),
-        "h_index": extraer_texto('div.h-index-value'),
-        "subject_area": extraer_texto('div#journal_subject_area'),
-        "publisher": extraer_texto('div#journalPublisher'),
-        "issn": extraer_texto('div#journalIssn'),
-        "widget": extraer_widget_html('div#journal_wdiget iframe'),
-        "publication_type": extraer_texto('div#journal_type')
+        "website": extraer_homepage(),
+        "h_index": extraer_h_index(),
+        "subject_area": None,  # Este campo no está en esa parte visible
+        "publisher": buscar_con_h2("Publisher"),
+        "issn": buscar_con_h2("ISSN"),
+        "widget": extraer_widget_html(),
+        "publication_type": buscar_con_h2("Publication type")
     }
 
     return datos
 
+
 def obtener_info_revista(nombre_revista):
-    """
-    Función principal que combina la búsqueda de la URL y el scraping de datos.
-    """
     print(f"\nProcesando revista: {nombre_revista}")
     url_revista = buscar_url_revista(nombre_revista)
+    print(f"URL final encontrada: {url_revista}")
+
     if not url_revista:
         print(f"No se encontró la revista: {nombre_revista}")
         return None
 
-    time.sleep(5)  # Tuve problemas con el servidor de SCImago, agregue un tiempo de espera para que no me detectara como bot
+    time.sleep(5)
     datos = scrap_datos_revista(url_revista)
-    
+
     if datos:
         print(f"Datos obtenidos correctamente de: {nombre_revista}")
     else:
