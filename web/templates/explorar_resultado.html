@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Revistas en {{ letra }}{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Revistas por letra: {{ letra }}</h2>
+
+        <div class="table-responsive">
+        <table id="tablaRevistas" class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Revista</th>
+                    <th>Áreas</th>
+                    <th>Catálogos</th>
+                    <th>H-Index</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for revista in revistas %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('detalle_revista', nombre=revista.nombre) }}">{{ revista.nombre }}</a>
+                    </td>
+                    <td>
+                        {% for area in revista.areas %}
+                            <a href="{{ url_for('ver_area', area_nombre=area) }}" class="badge bg-success text-decoration-none me-1">{{ area }}</a>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for catalogo in revista.catalogos %}
+                            <a href="{{ url_for('ver_catalogo', catalogo_nombre=catalogo) }}" class="badge bg-primary text-decoration-none me-1">{{ catalogo }}</a>
+                        {% endfor %}
+                    </td>
+                    <td>{{ revista.h_index }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#tablaRevistas').DataTable({
+            language: {
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                paginate: {
+                    next: "Siguiente",
+                    previous: "Anterior"
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Cátalogos{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Cátalogos de revistas</h2>
+
+    <!-- Carrusel horizontal de áreas -->
+    <div class="d-flex overflow-auto pb-3" style="gap: 1rem;">
+        {% for catalogo in catalogos %}
+        <div class="card flex-shrink-0 text-center area-card" style="width: 200px;">
+            <a href="{{ url_for('ver_catalogo', catalogo_nombre=catalogo|urlencode) }}" class="text-decoration-none text-dark">
+              <img src="{{ url_for('static', filename='images/catalogos/' + catalogo|lower + '.jpg') }}" class="card-img-top" alt="{{ catalogo }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ catalogo }}</h5>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

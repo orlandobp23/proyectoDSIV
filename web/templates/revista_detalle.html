@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ nombre }}{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">{{ nombre }}</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>H-Index:</strong> {{ revista.h_index }}</li>
+        <li class="list-group-item"><strong>Área temática:</strong> {{ revista.subject_area }}</li>
+        <li class="list-group-item"><strong>Editor:</strong> {{ revista.publisher }}</li>
+        <li class="list-group-item"><strong>ISSN:</strong> {{ revista.issn }}</li>
+        <li class="list-group-item"><strong>Tipo de publicación:</strong> {{ revista.publication_type }}</li>
+        <li class="list-group-item"><strong>Última visita:</strong> {{ revista.ultima_visita }}</li>
+        <li class="list-group-item"><strong>Catálogos:</strong> {{ revista.catalogos | join(', ') }}</li>
+        <li class="list-group-item"><strong>Sitio Web:</strong> <a href="{{ revista.website }}" target="_blank">{{ revista.website }}</a></li>
+    </ul>
+
+    {% if revista.widget %}
+    <div class="mt-4 text-center">
+        {{ revista.widget | safe }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

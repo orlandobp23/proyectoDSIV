@@ -1,0 +1,14 @@
+{
+  "acta geophysica": {
+    "website": "https://example.com",
+    "h_index": 42,
+    "subject_area": "Physics and Astronomy",
+    "publisher": "Springer",
+    "issn": "1234-5678",
+    "widget": "<iframe ...>",
+    "publication_type": "Journal",
+    "ultima_visita": "2025-05-08",
+    "areas": ["CIENCIAS_EXA", "ING"],
+    "catalogos": ["JCR", "SCOPUS"]
+  }
+}

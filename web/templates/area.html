@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Áreas{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Áreas del conocimiento</h2>
+
+    <!-- Carrusel horizontal de áreas -->
+    <div class="d-flex overflow-auto pb-3" style="gap: 1rem;">
+        {% for area in areas %}
+        <div class="card flex-shrink-0 text-center area-card" style="width: 200px;">
+            <a href="{{ url_for('ver_area', area_nombre=area) }}" class="text-decoration-none text-dark">
+                <img src="{{ url_for('static', filename='images/areas/' + area|lower + '.jpg') }}" class="card-img-top" alt="{{ area }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ area }}</h5>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

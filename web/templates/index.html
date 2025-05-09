@@ -1,78 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    {% block head %}
-    <title>{% block title %}{% endblock %}</title>
-    {% endblock %}
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Revistas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/area">Areas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/catalogo">Catalogo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/explorar">Explorar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/creditos">Creditos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/usuarios">Usuarios</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    {% if session.get('usuario') %}
-                        <li class="nav-item">
-                            <span class="navbar-text text-white me-3">Bienvenido, {{ session['usuario'] }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Cerrar sesión</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Iniciar sesión</a>
-                        </li>
-                    {% endif %}
-                </ul>
+{% extends 'base.html' %}
+{%block title%}Revistas Database{% endblock %}
+
+{% block body %}
+
+<!-- Hero Section -->
+ <section class="text-white text-center d-flex align-items-center justify-content-center" style="background: url('/static/images/fondo.jpg') no-repeat center center; background-size: cover; height: 400px;">
+    <div class="fondo_glass position-relative">
+        <img src="{{ url_for('static', filename='images/mascota.png') }}" alt="Logo" class="mascota">
+        <h1 class="display-4 fw-bold" style="margin-top: 90px;">Artículos Científicos</h1>
+        <p class="lead">Explora un mundo de artículos científicos.</p>
+        <a href="" class="btn color_btn btn-lg mt-3 ">Explorar Catálogo</a>
+    </div>
+</section>
+
+<section class="container py-5">
+    <h2 class="text-center mb-4">Te podrían interesar</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Nature</h5>
+                    <p class="card-text">
+                        <strong>Área:</strong> Multidisciplinaria<br>
+                        <strong>Cuartil:</strong> Q1<br>
+                        <strong>SJR:</strong> 14.72
+                    </p>
+                    <a href="https://www.nature.com/" class="btn btn_ver" target="_blank">Ver revista</a>
+                </div>
             </div>
         </div>
-    </nav>
 
-    <div class="container mt-3">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">The Lancet</h5>
+                    <p class="card-text">
+                        <strong>Área:</strong> Medicina<br>
+                        <strong>Cuartil:</strong> Q1<br>
+                        <strong>SJR:</strong> 11.54
+                    </p>
+                    <a href="https://www.thelancet.com/" class="btn btn_ver" target="_blank">Ver revista</a>
                 </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-    
-    {% block body %}
-    {% endblock %}
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <div class="container">
-            <p class="mb-0">© 2025 Movie Database. Todos los derechos reservados.</p>
+            </div>
         </div>
-        {% block footer %}
-        {% endblock %}
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-</html>
+
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">IEEE Transactions on Pattern Analysis</h5>
+                    <p class="card-text">
+                        <strong>Área:</strong> Ciencias de la Computación<br>
+                        <strong>Cuartil:</strong> Q1<br>
+                        <strong>SJR:</strong> 7.18
+                    </p>
+                    <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34" class="btn btn_ver" target="_blank">Ver revista</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="bg-light text-center py-5">
+    <div class="container">
+        <h2>¿Qué es AtlasCientífico?</h2>
+        <p class="lead">Nuestra plataforma permite explorar y acceder a publicaciones científicas de diversas áreas del conocimiento, promoviendo la divulgación académica y la colaboración investigativa.</p>
+    </div>
+</section>
+
+<section class="text-white py-5" style="background-color: rgb(4, 0, 255);">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <h2>+60,000</h2>
+                <p>Artículos disponibles</p>
+            </div>
+            <div class="col">
+                <h2>+1,200</h2>
+                <p>Editoriales </p>
+            </div>
+            <div class="col">
+                <h2>+8</h2>
+                <p>Áreas de investigación</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
+

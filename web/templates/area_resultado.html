@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Revistas en {{ area }}{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Revistas en área: {{ area }}</h2>
+
+    <div class="table-responsive">
+        <table id="tablaRevistas" class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Revista</th>
+                    <th>H-Index</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nombre, h_index in revistas %}
+                <tr>
+                    <td><a href="{{ url_for('detalle_revista', nombre=nombre) }}">{{ nombre }}</a></td>
+                    <td>{{ h_index }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#tablaRevistas').DataTable({
+            language: {
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                paginate: {
+                    next: "Siguiente",
+                    previous: "Anterior"
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
