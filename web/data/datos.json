@@ -28,6 +28,52 @@
             "SCOPUS"
         ],
         "ultima_visita": "2025-05-08"
-    }
+    },
 
+    "2d materials": {
+        "website": "https://onlinelibrary.wiley.com/journal/15214095",
+        "h_index": "675",
+        "subject_area": [
+            "Engineering - Mechanical Engineering",
+            "Engineering - Mechanics of Materials",
+            "Materials Science - Materials Science (miscellaneous)",
+            "Materials Science - Nanoscience and Nanotechnology"
+        ],
+        "publisher": "Wiley-Blackwell",
+        "issn": "09359648, 15214095",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=19881&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=19881\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO",
+            "CIENCIAS_EXA",
+            "ING"
+        ],
+        "catalogos": [
+            "JCR",
+            "SCOPUS"
+        ],
+        "ultima_visita": "2025-05-09"
+    },
+    "3 biotech": {
+        "website": "https://www.nature.com/nbt/",
+        "h_index": "531",
+        "subject_area": [
+            "Biochemistry, Genetics and Molecular Biology - Biotechnology",
+            "Biochemistry, Genetics and Molecular Biology - Molecular Medicine",
+            "Chemical Engineering - Bioengineering",
+            "Engineering - Biomedical Engineering",
+            "Immunology and Microbiology - Applied Microbiology and Biotechnology"
+        ],
+        "publisher": "Nature Research",
+        "issn": "10870156, 15461696",
+        "widget": "<a href=\"https://www.scimagojr.com/journalsearch.php?q=16115&amp;tip=sid&amp;exact=no\" title=\"SCImago Journal &amp; Country Rank\"><img border=\"0\" src=\"https://www.scimagojr.com/journal_img.php?id=16115\" alt=\"SCImago Journal &amp; Country Rank\"  /></a>",
+        "publication_type": "Journals",
+        "areas": [
+            "CIENCIAS_BIO"
+        ],
+        "catalogos": [
+            "JCR"
+        ],
+        "ultima_visita": "2025-05-09"
+}
 }

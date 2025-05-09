@@ -3,63 +3,70 @@
 
 {% block body %}
 <div class="container py-5">
-    <h2 class="mb-4 text-center">{{ nombre }}</h2>
-   <div class="text-center mb-4">
-    {% if session.get('usuario') %}
-        <button id="btn-favorito"
-                class="btn {{ 'btn-warning' if es_favorita else 'btn-outline-warning' }}"
-                data-nombre="{{ nombre }}">
-            ⭐ {{ 'Guardada' if es_favorita else 'Guardar como favorita' }}
-        </button>
-    {% else %}
-        <a href="{{ url_for('login') }}" class="btn btn-outline-secondary">
-            ⭐ Inicia sesión para guardar favorita
-        </a>
-    {% endif %}
-</div>
+    <div class="card shadow-lg rounded-4 p-4 border-0">
+        <h2 class="mb-4 text-center display-6">{{ nombre }}</h2>
 
+        <div class="text-center mb-4">
+            {% if session.get('usuario') %}
+                <button id="btn-favorito"
+                        class="btn {{ 'btn-warning' if es_favorita else 'btn-outline-warning' }} btn-lg rounded-pill px-4"
+                        data-nombre="{{ nombre }}">
+                    <i class="bi bi-star{{ '' if es_favorita else '-fill' }}"></i> 
+                    {{ 'Guardada' if es_favorita else 'Guardar como favorita' }}
+                </button>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                    <i class="bi bi-person-lock"></i> Inicia sesión para guardar favorita
+                </a>
+            {% endif %}
+        </div>
 
-    <ul class="list-group">
-        <li class="list-group-item"><strong>H-Index:</strong> {{ revista.h_index }}</li>
-        <li class="list-group-item"><strong>Área temática:</strong> {{ revista.subject_area }}</li>
-        <li class="list-group-item"><strong>Editor:</strong> {{ revista.publisher }}</li>
-        <li class="list-group-item"><strong>ISSN:</strong> {{ revista.issn }}</li>
-        <li class="list-group-item"><strong>Tipo de publicación:</strong> {{ revista.publication_type }}</li>
-        <li class="list-group-item"><strong>Última visita:</strong> {{ revista.ultima_visita }}</li>
-        <li class="list-group-item"><strong>Catálogos:</strong> {{ revista.catalogos | join(', ') }}</li>
-        <li class="list-group-item"><strong>Sitio Web:</strong> <a href="{{ revista.website }}" target="_blank">{{ revista.website }}</a></li>
-    </ul>
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item"><strong>H-Index:</strong> {{ revista.h_index }}</li>
+            <li class="list-group-item"><strong>Área temática:</strong> {{ revista.subject_area or 'N/D' }}</li>
+            <li class="list-group-item"><strong>Editor:</strong> {{ revista.publisher }}</li>
+            <li class="list-group-item"><strong>ISSN:</strong> {{ revista.issn }}</li>
+            <li class="list-group-item"><strong>Tipo de publicación:</strong> {{ revista.publication_type }}</li>
+            <li class="list-group-item"><strong>Última visita:</strong> {{ revista.ultima_visita }}</li>
+            <li class="list-group-item"><strong>Catálogos:</strong> {{ revista.catalogos | join(', ') }}</li>
+            <li class="list-group-item">
+                <strong>Sitio Web:</strong> 
+                <a href="{{ revista.website }}" class="link-primary text-decoration-underline" target="_blank">
+                    {{ revista.website }}
+                </a>
+            </li>
+        </ul>
 
-    {% if revista.widget %}
-    <div class="mt-4 text-center">
-        {{ revista.widget | safe }}
+        {% if revista.widget %}
+        <div class="mt-4 text-center">
+            {{ revista.widget | safe }}
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('btn-favorito');
     if (!btn) return;
 
     btn.addEventListener('click', () => {
-        const nombre = encodeURIComponent(btn.dataset.nombre);  // 🔁 NO usar toLowerCase aquí
-            fetch(`/favorito/${nombre}`, {
-                method: 'POST'
+        const nombre = encodeURIComponent(btn.dataset.nombre);
+        fetch(`/favorito/${nombre}`, {
+            method: 'POST'
         }).then(response => response.json())
           .then(data => {
             if (data.status === 'added') {
                 btn.classList.remove('btn-outline-warning');
                 btn.classList.add('btn-warning');
-                btn.textContent = '⭐ Guardada';
+                btn.innerHTML = '⭐ Guardada';
             } else if (data.status === 'removed') {
                 btn.classList.remove('btn-warning');
                 btn.classList.add('btn-outline-warning');
-                btn.textContent = '⭐ Guardar como favorita';
+                btn.innerHTML = '⭐ Guardar como favorita';
             }
         });
     });
 });
 </script>
-
-
 {% endblock %}
