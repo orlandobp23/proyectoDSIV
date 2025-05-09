@@ -1,0 +1,11 @@
+{
+    "acta geophysica": {
+      "areas": ["CIENCIAS_EXA", "ING"],
+      "catalogos": ["SCOPUS"]
+    },
+    "nature chemistry": {
+      "areas": ["CIENCIAS_EXA"],
+      "catalogos": ["JCR"]
+    }
+  }
+  
