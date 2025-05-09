@@ -26,7 +26,7 @@ for archivo in os.listdir(folder_areas):
 
 # leer catalogos
 for archivo in os.listdir(folder_catalogos):
-    catalogo = archivo.replace(".csv", "").split()[0].split(" ")[0].upper()
+    catalogo = archivo.replace(".csv", "").replace("_RadGridExport", "").upper()
     ruta = os.path.join(folder_catalogos, archivo)
     df = pd.read_csv(ruta, encoding="latin1")
     
