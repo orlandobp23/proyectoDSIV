@@ -11,10 +11,14 @@ def buscar_url_revista(nombre_revista):
     """
     query = quote(nombre_revista)
     url_busqueda = BASE_SEARCH_URL + query
-    print(f"🔍 Buscando URL de: {nombre_revista}")
+    print(f"Buscando URL de: {nombre_revista}")
     
     try:
-        response = requests.get(url_busqueda, timeout=10)
+        headers ={
+         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+        }
+        response = requests.get(url_busqueda,headers=headers, timeout=10)
+        time.sleep(5)  # Tuve problemas con el servidor de SCImago, agregue un tiempo de espera para que no me detectara como bot
     except Exception as e:
         print(f"Error en la conexión para {nombre_revista}: {e}")
         return None
@@ -28,19 +32,22 @@ def buscar_url_revista(nombre_revista):
 
     if resultado:
         perfil_url = "https://www.scimagojr.com/" + resultado.get("href")
-        print(f"✓ URL encontrada: {perfil_url}")
+        print(f"URL encontrada: {perfil_url}")
         return perfil_url
     else:
-        print(f"✗ No se encontró perfil para: {nombre_revista}")
+        print(f"No se encontró perfil para: {nombre_revista}")
         return None
 
 def scrap_datos_revista(url):
     """
     Extrae información del perfil de la revista desde su página en SCImago.
     """
-    print(f"🌐 Accediendo a perfil: {url}")
+    print(f"Accediendo a perfil: {url}")
     try:
-        response = requests.get(url, timeout=10)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+        }
+        response = requests.get(url,headers=headers, timeout=10)
     except Exception as e:
         print(f"Error accediendo a {url}: {e}")
         return None
@@ -75,18 +82,18 @@ def obtener_info_revista(nombre_revista):
     """
     Función principal que combina la búsqueda de la URL y el scraping de datos.
     """
-    print(f"\n🔎 Procesando revista: {nombre_revista}")
+    print(f"\nProcesando revista: {nombre_revista}")
     url_revista = buscar_url_revista(nombre_revista)
     if not url_revista:
-        print(f"✗ No se encontró la revista: {nombre_revista}")
+        print(f"No se encontró la revista: {nombre_revista}")
         return None
 
-    time.sleep(1)  # Evita saturar SCImago con muchas peticiones rápidas
+    time.sleep(5)  # Tuve problemas con el servidor de SCImago, agregue un tiempo de espera para que no me detectara como bot
     datos = scrap_datos_revista(url_revista)
     
     if datos:
-        print(f"✓ Datos obtenidos correctamente de: {nombre_revista}")
+        print(f"Datos obtenidos correctamente de: {nombre_revista}")
     else:
-        print(f"✗ Falló la extracción de datos para: {nombre_revista}")
+        print(f"Falló la extracción de datos para: {nombre_revista}")
 
     return datos

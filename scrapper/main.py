@@ -5,8 +5,8 @@ from scraper import obtener_info_revista
 from utils import cargar_json, guardar_json, necesita_actualizacion
 
 def main():
-    path_entrada = 'data/json/prueba1.json'
-    path_salida = 'data/detalles_revistas.json'
+    path_entrada = 'data/json/revistas.json'
+    path_salida = 'data/json/detalles_revistas.json'
 
     revistas = cargar_json(path_entrada)
     detalles = cargar_json(path_salida)
